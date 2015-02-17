@@ -53,28 +53,30 @@
 
 				svg.removeChild(use);
 
-				if (url_root.length) {
-					var xhr = CACHE[url_root] = CACHE[url_root] || new XMLHttpRequest();
+                if(url_hash.length) {
+                    if (url_root.length) {
+                        var xhr = CACHE[url_root] = CACHE[url_root] || new XMLHttpRequest();
 
-					if (!xhr.s) {
-						xhr.s = [];
+                        if (!xhr.s) {
+                            xhr.s = [];
 
-						xhr.open('GET', url_root);
+                            xhr.open('GET', url_root);
 
-						xhr.onload = onload;
+                            xhr.onload = onload;
 
-						xhr.send();
-					}
+                            xhr.send();
+                        }
 
-					xhr.s.push([svg, url_hash]);
+                        xhr.s.push([svg, url_hash]);
 
-					if (xhr.readyState === 4) {
-						xhr.onload();
-					}
+                        if (xhr.readyState === 4) {
+                            xhr.onload();
+                        }
 
-				} else {
-					embed(svg, document.getElementById(url_hash));
-				}
+                    } else {
+                        embed(svg, document.getElementById(url_hash));
+                    }
+                }
 			}
 		}
 
